@@ -7,6 +7,7 @@ const ContactUser = (contact) => {
     <li key={id} className={css.user}>
       <h3>{name}:</h3>
       <p>{number}</p>
+      <button type='button' className={css.deleteBtn}>Delete</button>
     </li>
   );
 };
