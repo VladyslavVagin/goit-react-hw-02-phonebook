@@ -2,23 +2,25 @@ import React from 'react';
 import { Component } from 'react';
 import css from './AddContactForm.module.css';
 
-
 class AddContactForm extends Component {
   state = {
     name: '',
     number: '',
   };
 
-  handleChange = ({ target }) => this.setState({ [target.name]: target.value })
+  handleChange = ({ target }) => this.setState({ [target.name]: target.value });
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
-    this.props.createUser({ ...this.state });
-     
-  }
+    this.props.createUser(this.state);
+    this.setState({
+      name: '',
+      number: '',
+    });
+  };
 
   render() {
-    const {name, number} = this.state;
+    const { name, number } = this.state;
     return (
       <div>
         <form className={css.contactForm} onSubmit={this.handleSubmit}>

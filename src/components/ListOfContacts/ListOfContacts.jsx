@@ -1,22 +1,17 @@
-import React from 'react'
+import ContactUser from "components/Contact/ContactUser"
+import css from './ListOfContacts.module.css'
 
-const ListOfContacts = (arrayOfContacts) => {
-  arrayOfContacts.map(contact => {
-    const {id, name, number} = contact;
 
+
+const ListOfContacts = (arrayCont) => {
     return (
-        <>
+        <div>
             <h2>Contacts</h2>
-            <ul>
-                <li key={id}>
-                   <h3>{name}</h3>
-                   <p>{number}</p>
-                </li>
+            <ul className={css.contactList}>
+             {arrayCont.map(contact => ContactUser(contact))}
             </ul>
-        </>
-      )
-  })
-
+        </div>
+      ) 
 }
 
 export default ListOfContacts
