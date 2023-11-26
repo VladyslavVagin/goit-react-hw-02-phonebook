@@ -1,16 +1,24 @@
-import ContactUser from "components/Contact/ContactUser"
-import css from './ListOfContacts.module.css'
+import css from './ListOfContacts.module.css';
 
+const ListOfContacts = (arrayCont, deleteContact) => {
+  return (
+    <div>
+      <ul className={css.contactList}>
+        {arrayCont.map(contact => {
+          const { id, name, number } = contact;
+          return (
+            <li key={id} className={css.user}>
+              <h3>{name}:</h3>
+              <p>{number}</p>
+              <button type="button" className={css.deleteBtn} onClick={deleteContact} id={id}>
+                Delete
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
 
-
-const ListOfContacts = (arrayCont) => {
-    return (
-        <div>
-            <ul className={css.contactList}>
-             {arrayCont.map(contact => ContactUser(contact))}
-            </ul>
-        </div>
-      ) 
-}
-
-export default ListOfContacts
+export default ListOfContacts;
