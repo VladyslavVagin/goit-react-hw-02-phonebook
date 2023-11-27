@@ -22,7 +22,6 @@ class AddContactForm extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <div>
         <form className={css.contactForm} onSubmit={this.handleSubmit}>
           <label className={css.label}>
             <input
@@ -48,7 +47,6 @@ class AddContactForm extends Component {
           </label>
           <button className={css.addContactBtn}>Add contact</button>
         </form>
-      </div>
     );
   }
 }
