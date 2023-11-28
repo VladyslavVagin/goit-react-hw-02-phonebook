@@ -1,54 +1,53 @@
 import React from 'react';
-import { Component } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as yup from 'yup';
 import css from './AddContactForm.module.css';
 
-class AddContactForm extends Component {
-  state = {
-    name: '',
-    number: '',
+const initialValues = {
+  name: '',
+  number: '',
+}
+
+const schema = yup.object().shape({
+  name: yup.string().min(5).required(),
+  number: yup.number().required(),
+})
+
+const AddContactForm = ({createUser}) => {
+
+ const handleSubmit = (values, {resetForm}) => {
+  console.log(values);
+  createUser(values);
+  resetForm();
   };
 
-  handleChange = ({ target }) => this.setState({ [target.name]: target.value });
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.createUser(this.state);
-    this.setState({
-      name: '',
-      number: '',
-    });
-  };
-
-  render() {
-    const { name, number } = this.state;
     return (
-        <form className={css.contactForm} onSubmit={this.handleSubmit}>
-          <label className={css.label}>
-            <input
+      <Formik initialValues={initialValues} validationSchema={schema} onSubmit={handleSubmit}>
+        <Form className={css.contactForm} autoComplete='off'>
+          <label className={css.label} htmlFor='name'>
+            <Field
               type="text"
               name="name"
               className={css.input}
-              value={name}
               required
               placeholder="Name"
-              onChange={this.handleChange}
             />
+            <ErrorMessage name="name" component="span"/>
           </label>
-          <label className={css.label}>
-            <input
+          <label className={css.label} htmlFor='number'>
+            <Field
               type="tel"
               name="number"
               className={css.input}
-              value={number}
               required
               placeholder="Number"
-              onChange={this.handleChange}
             />
+            <ErrorMessage name="number" component="span"/>
           </label>
-          <button className={css.addContactBtn}>Add contact</button>
-        </form>
+          <button className={css.addContactBtn} type='submit'>Add contact</button>
+        </Form>
+      </Formik>
     );
   }
-}
 
 export default AddContactForm;
