@@ -16,7 +16,6 @@ const schema = yup.object().shape({
 const AddContactForm = ({createUser}) => {
 
  const handleSubmit = (values, {resetForm}) => {
-  console.log(values);
   createUser(values);
   resetForm();
   };
